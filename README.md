@@ -130,7 +130,7 @@ Now you're ready to start the web server.
 python app.py
 ```
 
-Navigate to `http://12Just copy the entire code block above and paste it into your terminal. It will create the `README.md` file with the exact content and formatting you need for your GitHub repository./127.0.0.1:5000` in your web browser.
+Navigate to `http://127.0.0.1:5000` in your web browser.
 
 ## 🚀 Usage
 
