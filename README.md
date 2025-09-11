@@ -70,7 +70,6 @@ For a complete walkthrough of the project, check out the video demo:
     │   └── data_visualization_agent.py # The core EDA agent logic
     ├── pipeline/
     │   ├── rag_pipeline.py     # RAG pipeline for building the knowledge base
-    │   └── eda_knowledge_base.csv # Knowledge base for the RAG pipeline
     ├── __init__.py
     ├── exception.py            # Custom exception handling
     ├── logger.py               # Logging setup
