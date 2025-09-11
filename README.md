@@ -83,8 +83,8 @@ Follow these steps to get the project running on your local machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/your-username/visionai.git](https://github.com/your-username/visionai.git)
-cd visionai
+git clone https://github.com/Str1nX03/VisionAI.git
+cd VisionAI
 ```
 
 ### 2. Create and Activate a Virtual Environment
