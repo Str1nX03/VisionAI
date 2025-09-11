@@ -2,6 +2,28 @@
 
 VisionAI is a full-stack web application that leverages a sophisticated AI agent to automate the Exploratory Data Analysis (EDA) process. Users can sign up, log in, and upload their CSV datasets to receive a complete suite of auto-generated visualizations, each accompanied by insightful, AI-powered captions.
 
+## 📸 Project Showcase
+
+### Screenshots
+
+Here's a glimpse of the VisionAI application in action.
+
+**Landing Page**
+![Landing Page](./website/landing_page.PNG)
+
+**Sign Up Page**
+![Sign Up](./website/sign_up_page.PNG)
+
+**Product Page**
+![Product](./website/product_page.PNG)
+
+### Video Demo
+
+For a complete walkthrough of the project, check out the video demo:
+
+[VisionAI Demo](./website/product_video.mp4)
+
+
 ## 🌟 Features
 
 * **User Authentication:** Secure signup, login, and logout functionality.
@@ -35,7 +57,7 @@ VisionAI is a full-stack web application that leverages a sophisticated AI agent
 │   ├── css/
 │   │   └── style.css           # Custom CSS for UI enhancements
 │   ├── js/
-│   │   └── script.js           # JavaScript for frontend interactivity (e.g., loading spinner)
+│   │   └── main.js           # JavaScript for frontend interactivity (e.g., loading spinner)
 │   └── plots/                  # Generated plots are saved here
 ├── templates/
 │   ├── base.html               # Base template with navbar and footer
@@ -48,7 +70,6 @@ VisionAI is a full-stack web application that leverages a sophisticated AI agent
     │   └── data_visualization_agent.py # The core EDA agent logic
     ├── pipeline/
     │   ├── rag_pipeline.py     # RAG pipeline for building the knowledge base
-    │   └── eda_knowledge_base.csv # Knowledge base for the RAG pipeline
     ├── __init__.py
     ├── exception.py            # Custom exception handling
     ├── logger.py               # Logging setup
@@ -62,8 +83,8 @@ Follow these steps to get the project running on your local machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/your-username/visionai.git](https://github.com/your-username/visionai.git)
-cd visionai
+git clone https://github.com/Str1nX03/VisionAI.git
+cd VisionAI
 ```
 
 ### 2. Create and Activate a Virtual Environment
