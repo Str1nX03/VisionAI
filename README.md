@@ -8,9 +8,14 @@ VisionAI is a full-stack web application that leverages a sophisticated AI agent
 
 Here's a glimpse of the VisionAI application in action.
 
-| Landing Page                                      | Sign Up Page                                      | Product Page                                   |
-| ------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------- |
-| ![Landing Page](./website/landing_page.PNG)       | ![Sign Up](./website/sign_up_page.PNG)            | ![Product Page](./website/product_page.PNG) |
+**Landing Page**
+![Landing Page](./website/landing_page.PNG)
+
+**Sign Up Page**
+![Sign Up](./website/sign_up_page.PNG)
+
+**Product Page**
+![Product](./website/product_page.PNG)
 
 ### Video Demo
 
