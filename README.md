@@ -57,7 +57,7 @@ For a complete walkthrough of the project, check out the video demo:
 │   ├── css/
 │   │   └── style.css           # Custom CSS for UI enhancements
 │   ├── js/
-│   │   └── script.js           # JavaScript for frontend interactivity (e.g., loading spinner)
+│   │   └── main.js           # JavaScript for frontend interactivity (e.g., loading spinner)
 │   └── plots/                  # Generated plots are saved here
 ├── templates/
 │   ├── base.html               # Base template with navbar and footer
