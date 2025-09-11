@@ -2,6 +2,22 @@
 
 VisionAI is a full-stack web application that leverages a sophisticated AI agent to automate the Exploratory Data Analysis (EDA) process. Users can sign up, log in, and upload their CSV datasets to receive a complete suite of auto-generated visualizations, each accompanied by insightful, AI-powered captions.
 
+## 📸 Project Showcase
+
+### Screenshots
+
+Here's a glimpse of the VisionAI application in action.
+
+| Landing Page                                      | Sign Up Page                                      | Product Page                                   |
+| ------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------- |
+| ![Landing Page](./website/landing_page.PNG)       | ![Sign Up](./website/sign_up_page.PNG)            | ![Product Page](./website/product_page.PNG) |
+
+### Video Demo
+
+For a complete walkthrough of the project, check out the video demo:
+
+[**Watch the Video Demo Here**](./website/product_video.mp4)
+
 ## 🌟 Features
 
 * **User Authentication:** Secure signup, login, and logout functionality.
