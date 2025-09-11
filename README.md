@@ -1,4 +1,3 @@
-cat > README.md <<'EOF'
 # VisionAI: AI-Powered EDA & Visualization Agent
 
 VisionAI is a full-stack web application that leverages a sophisticated AI agent to automate the Exploratory Data Analysis (EDA) process. Users can sign up, log in, and upload their CSV datasets to receive a complete suite of auto-generated visualizations, each accompanied by insightful, AI-powered captions.
