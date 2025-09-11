@@ -7,16 +7,13 @@ from werkzeug.utils import secure_filename
 from src.agents.data_visualization_agent import EDAVisualizationAgent
 from src.utils import save_dataset
 
-# --- Flask App Initialization ---
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-# --- Configuration ---
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'csv'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# --- Database Setup ---
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect('database/users.db')
@@ -40,7 +37,6 @@ def init_db():
     ''')
     db.commit()
 
-# --- Login Required Decorator ---
 def login_required(view):
     @wraps(view)
     def wrapped_view(**kwargs):
@@ -49,15 +45,12 @@ def login_required(view):
         return view(**kwargs)
     return wrapped_view
 
-# --- Helper Functions ---
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# --- Directory Setup ---
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(os.path.join('static', 'plots'), exist_ok=True)
 
-# --- Routes ---
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -133,7 +126,6 @@ def dashboard():
             return redirect(request.url)
     return render_template('dashboard.html', has_results=False)
 
-# --- Main Execution ---
 if __name__ == '__main__':
     with app.app_context():
         init_db()

@@ -8,8 +8,8 @@ from langgraph.graph import StateGraph, END
 from langchain_core.messages import SystemMessage
 from src.exception import CustomException
 import sys
-import os # Import the os module for file path checking
-import requests # Import requests to check for the Ollama connection
+import os 
+import requests 
 
 from src.utils import get_llm, get_dataset
 from src.pipeline.rag_pipeline import RAGPipeline
@@ -33,7 +33,7 @@ class EDAVisualizationAgent:
     def __init__(self, llm = get_llm("groq")):
         if llm is None:
             raise ValueError("An LLM instance must be provided.")
-        self._check_ollama_connection() # Add a check for the Ollama server
+        self._check_ollama_connection() 
         self.llm = llm
         self.graph = self._build_graph()
         sns.set_theme(style="whitegrid", palette="mako")
@@ -53,7 +53,6 @@ class EDAVisualizationAgent:
                 "You can start it by running the following command in your terminal:\n\n"
                 "ollama serve\n"
             )
-            # Print a user-friendly message and raise an exception to stop execution.
             print("\n" + "="*80)
             print("🛑 Ollama Connection Error")
             print("-" * 80)
@@ -172,7 +171,6 @@ class EDAVisualizationAgent:
             sns.boxplot(x=df[col], ax=axes[1], color=sns.color_palette("mako", 2)[1])
             plt.tight_layout()
 
-            # ✅ Save instead of show
             plots_dir = os.path.join("static", "plots")
             os.makedirs(plots_dir, exist_ok=True)
             filename = f"hist_box_{col}.png"
@@ -180,7 +178,6 @@ class EDAVisualizationAgent:
             fig.savefig(filepath)
             plt.close(fig)
 
-            # Generate caption with LLM
             caption_state = self._generate_caption({
                 "current_plot_context": {
                     "plot_type": "Histogram and Box Plot",
@@ -189,7 +186,6 @@ class EDAVisualizationAgent:
             })
             caption = caption_state["visualizations"][0]["caption"]
 
-            # Add visualization entry
             state["visualizations"].append({
                 "title": f"Distribution of {col}",
                 "path": filename,
@@ -213,13 +209,11 @@ class EDAVisualizationAgent:
             ax.set_title(f'Frequency Count of {col}', fontsize=16)
             plt.tight_layout()
 
-            # ✅ Save figure
             filename = f"countplot_{col}.png"
             filepath = os.path.join(plots_dir, filename)
             fig.savefig(filepath)
             plt.close(fig)
 
-            # Generate caption
             caption_state = self._generate_caption({
                 "current_plot_context": {
                     "plot_type": "Bar Chart",
@@ -228,7 +222,6 @@ class EDAVisualizationAgent:
             })
             caption = caption_state["visualizations"][0]["caption"]
 
-            # Add visualization entry
             state["visualizations"].append({
                 "title": f"Frequency of {col}",
                 "path": filename,
@@ -248,7 +241,6 @@ class EDAVisualizationAgent:
         ax.set_title("Correlation Matrix of Numerical Features", fontsize=18)
         plt.tight_layout()
 
-        # ✅ Save figure
         plots_dir = os.path.join("static", "plots")
         os.makedirs(plots_dir, exist_ok=True)
         filename = "correlation_heatmap.png"
@@ -256,7 +248,6 @@ class EDAVisualizationAgent:
         fig.savefig(filepath)
         plt.close(fig)
 
-        # Generate caption
         caption_state = self._generate_caption({
             "current_plot_context": {
                 "plot_type": "Correlation Heatmap",
@@ -265,7 +256,6 @@ class EDAVisualizationAgent:
         })
         caption = caption_state["visualizations"][0]["caption"]
 
-        # Add visualization entry
         state["visualizations"].append({
             "title": "Correlation Heatmap",
             "path": filename,
@@ -299,7 +289,6 @@ class EDAVisualizationAgent:
         Runs the full EDA and visualization workflow, with contextual insights.
         Returns results formatted for the dashboard template.
         """
-        # --- INPUT VALIDATION ---
         if not os.path.isfile(file_path):
             error_msg = (
                 f"The provided path is not a valid file: '{file_path}'\n"
@@ -309,10 +298,8 @@ class EDAVisualizationAgent:
             )
             raise FileNotFoundError(error_msg)
 
-        # Load dataset once here for summary info
         df = get_dataset(file_path)
 
-        # Prepare RAG pipeline
         rag = RAGPipeline()
         initial_state = {
             "file_path": file_path,
@@ -323,10 +310,8 @@ class EDAVisualizationAgent:
             "retriever": rag.get_retriever()
         }
 
-        # Run workflow
         final_state = self.graph.invoke(initial_state)
 
-        # Build results for frontend
         results = {
             "basic_info": {
                 "rows": df.shape[0],

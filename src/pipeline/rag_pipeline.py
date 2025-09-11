@@ -7,7 +7,6 @@ from langchain_community.embeddings import OllamaEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from src.logger import logging
 from src.exception import CustomException
-from src.utils import get_file_path
 
 class RAGPipeline:
     """
@@ -15,7 +14,6 @@ class RAGPipeline:
     """
 
     def __init__(self, data_source=None, chroma_db_path="chroma_db", embedding_model="nomic-embed-text"):
-        # Use the default eda_knowledge_base.csv if no data_source is provided
         self.data_source = data_source if data_source else os.path.join('src', 'pipeline', 'eda_knowledge_base.csv')
         self.chroma_db_path = chroma_db_path
         self.embedding_model = embedding_model
@@ -45,7 +43,6 @@ class RAGPipeline:
             logging.info(f"Knowledge base built and saved to '{self.chroma_db_path}'.")
 
         except ValueError as e:
-            # Catch the specific error for a missing model
             if "not found, try pulling it first" in str(e):
                 error_msg = (
                     f"The embedding model '{self.embedding_model}' was not found by the Ollama server.\n"
