@@ -1,0 +1,14 @@
+flask
+matplotlib
+numpy
+pandas
+seaborn
+langchain
+langchain_community
+langchain_core
+langchain_ollama
+langchain_groq
+langgraph
+ipykernel
+chromadb
+python-dotenv

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Data Visualization App{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Data Analysis Dashboard</h1>
+        <p>Upload your CSV file to generate insights and visualizations</p>
+    </div>
+
+    {% if not has_results %}
+    <div class="upload-section">
+        <form method="POST" action="{{ url_for('dashboard') }}" enctype="multipart/form-data" class="upload-form">
+    <div class="upload-area" id="uploadArea">
+        <div class="upload-content">
+            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            <h3>Select or drop your CSV</h3>
+            <p>Only .csv files allowed</p>
+            <!-- ✅ keep this input always present -->
+            <input type="file" name="file" id="fileInput" accept=".csv" required>
+        </div>
+        <div class="upload-progress" id="uploadProgress" style="display:none;">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-text">Processing...</span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary upload-btn" id="submitBtn">
+        <i class="fas fa-analytics"></i>
+        Analyze Data
+    </button>
+</form>
+    </div>
+    {% endif %}
+
+    {% if has_results and results %}
+    <div class="results-section">
+        <div class="results-header">
+            <h2>Analysis Results</h2>
+            <button class="btn btn-secondary" onclick="location.reload()">
+                <i class="fas fa-plus"></i>
+                Analyze New File
+            </button>
+        </div>
+        
+        <div class="results-grid">
+            {% if results.basic_info %}
+            <div class="result-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-info-circle"></i> Dataset Information</h3>
+                </div>
+                <div class="card-content">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Rows:</span>
+                            <span class="info-value">{{ results.basic_info.get('rows', 'N/A') }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Columns:</span>
+                            <span class="info-value">{{ results.basic_info.get('columns', 'N/A') }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Memory Usage:</span>
+                            <span class="info-value">{{ results.basic_info.get('memory_usage', 'N/A') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if results.visualizations %}
+            {% for viz in results.visualizations %}
+            <div class="result-card visualization-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-line"></i> {{ viz.title or 'Visualization' }}</h3>
+                </div>
+                <div class="card-content">
+                    {% if viz.path %}
+                    <img src="{{ url_for('static', filename='plots/' + viz.path.split('/')[-1]) }}" 
+                         alt="{{ viz.title or 'Visualization' }}" 
+                         class="visualization-image">
+                    {% endif %}
+                    {% if viz.description %}
+                    <p class="viz-description">{{ viz.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // File upload drag and drop functionality
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const uploadProgress = document.getElementById('uploadProgress');
+    const submitBtn = document.getElementById('submitBtn');
+
+    uploadArea.addEventListener('click', () => fileInput.click());
+    
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('drag-over');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('drag-over');
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            updateFileName(files[0].name);
+        }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            updateFileName(e.target.files[0].name);
+        }
+    });
+
+    function updateFileName(fileName) {
+        const uploadContent = uploadArea.querySelector('.upload-content p');
+        uploadContent.textContent = fileName;
+        uploadArea.classList.add('has-file');
+    }
+
+    // Form submission with progress
+    document.querySelector('.upload-form').addEventListener('submit', function() {
+        uploadProgress.style.display = 'block';
+        submitBtn.disabled = true;
+    });
+</script>
+{% endblock %}
