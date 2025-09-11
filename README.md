@@ -16,7 +16,8 @@ Here's a glimpse of the VisionAI application in action.
 
 For a complete walkthrough of the project, check out the video demo:
 
-[**Watch the Video Demo Here**](./website/product_video.mp4)
+[**Watch the Video Demo Here**]
+(./website/product_video.mp4)
 
 ## 🌟 Features
 
