@@ -33,7 +33,7 @@ class EDAVisualizationAgent:
     def __init__(self, llm = get_llm("groq")):
         if llm is None:
             raise ValueError("An LLM instance must be provided.")
-        self._check_ollama_connection() 
+        # self._check_ollama_connection() 
         self.llm = llm
         self.graph = self._build_graph()
         sns.set_theme(style="whitegrid", palette="mako")
