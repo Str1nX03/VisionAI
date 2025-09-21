@@ -164,5 +164,4 @@ Navigate to `http://127.0.0.1:5000` in your web browser.
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-EOF
+This project is licensed under the MIT License.
