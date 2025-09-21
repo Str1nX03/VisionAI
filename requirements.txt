@@ -12,3 +12,4 @@ langgraph
 ipykernel
 chromadb
 python-dotenv
+gunicorn
