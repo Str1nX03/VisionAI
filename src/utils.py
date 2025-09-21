@@ -5,8 +5,6 @@ from langchain_ollama.chat_models import ChatOllama
 from src.logger import logging
 from src.exception import CustomException
 import pandas as pd
-from dotenv import load_dotenv
-load_dotenv()
 
 def get_file_path(folder='data'):
     
@@ -30,7 +28,7 @@ def get_llm(llm_type: str):
         logging.info("Choosing an LLM Model.")
 
         if llm_type == "Groq" or llm_type == "groq":
-            llm = ChatGroq(model = "llama-3.1-8b-instant", temperature = 1)
+            llm = ChatGroq(model = "llama-3.1-8b-instant", temperature = 1, api_key = os.getenv('GROQ_API_KEY'))
             logging.info("LLM Model: {llm} has been choosen.")
             return llm
         
