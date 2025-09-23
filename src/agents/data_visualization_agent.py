@@ -12,7 +12,7 @@ import os
 import requests 
 
 from src.utils import get_llm, get_dataset
-from src.pipeline.rag_pipeline import RAGPipeline
+# from src.pipeline.rag_pipeline import RAGPipeline
 warnings.filterwarnings("ignore")
 
 class AgentState(TypedDict):
@@ -300,14 +300,14 @@ class EDAVisualizationAgent:
 
         df = get_dataset(file_path)
 
-        rag = RAGPipeline()
+        # rag = RAGPipeline()
         initial_state = {
             "file_path": file_path,
             "target_column": target_column,
             "visualizations": [],
             "current_plot_context": {},
-            "insights": [],
-            "retriever": rag.get_retriever()
+            "insights": []
+            # "retriever": rag.get_retriever()
         }
 
         final_state = self.graph.invoke(initial_state)
