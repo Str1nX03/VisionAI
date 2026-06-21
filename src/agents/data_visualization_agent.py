@@ -12,7 +12,7 @@ import os
 import requests 
 
 from src.utils import get_llm, get_dataset
-# from src.pipeline.rag_pipeline import RAGPipeline
+
 warnings.filterwarnings("ignore")
 
 class AgentState(TypedDict):
@@ -37,28 +37,6 @@ class EDAVisualizationAgent:
         self.llm = llm
         self.graph = self._build_graph()
         sns.set_theme(style="whitegrid", palette="mako")
-
-    # def _check_ollama_connection(self, base_url="http://localhost:11434"):
-    #     """
-    #     Checks if the Ollama server is running before proceeding.
-    #     """
-    #     print("🔎 Checking for Ollama server connection...")
-    #     try:
-    #         requests.get(base_url)
-    #         print("✅ Ollama server is running.")
-    #     except requests.exceptions.ConnectionError:
-    #         error_msg = (
-    #             f"Connection to Ollama server at '{base_url}' failed.\n"
-    #             "Please ensure the Ollama application is running on your machine.\n"
-    #             "You can start it by running the following command in your terminal:\n\n"
-    #             "ollama serve\n"
-    #         )
-    #         print("\n" + "="*80)
-    #         print("🛑 Ollama Connection Error")
-    #         print("-" * 80)
-    #         print(error_msg)
-    #         print("="*80 + "\n")
-    #         raise ConnectionRefusedError("Ollama server not found.")
 
     def _get_contextual_insights(self, state: AgentState) -> dict:
         """Uses the RAG retriever to get analysis suggestions."""
@@ -300,14 +278,12 @@ class EDAVisualizationAgent:
 
         df = get_dataset(file_path)
 
-        # rag = RAGPipeline()
         initial_state = {
             "file_path": file_path,
             "target_column": target_column,
             "visualizations": [],
             "current_plot_context": {},
             "insights": []
-            # "retriever": rag.get_retriever()
         }
 
         final_state = self.graph.invoke(initial_state)
